@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -21,12 +20,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	// create a Json Decoder Reader using io.file reader
-	d := json.NewDecoder(f)
 
-	// Decode the story and print it with its fields
-	var story cyoa.Story
-	if err := d.Decode(&story); err != nil {
+	story, err := cyoa.JsonStory(f)
+	if err != nil {
 		panic(err)
 	}
 	fmt.Printf("%+v\n", story)
